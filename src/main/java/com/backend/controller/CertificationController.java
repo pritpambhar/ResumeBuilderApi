@@ -17,4 +17,10 @@ public class CertificationController {
 	{
 		return ResponseEntity.ok("success");
 	}
+	
+	@PostMapping("/certifications")
+	public ResponseEntity<?> saveCertifications(@ModelAttribute Certifications certifications)
+	{
+		return ResponseEntity.ok("success");
+	}
 }
