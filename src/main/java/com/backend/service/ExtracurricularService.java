@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.model.Constants;
 import com.backend.model.Extracurriculars;
 import com.backend.model.Resume;
 import com.backend.repository.ResumeRepo;
@@ -18,22 +19,32 @@ public class ExtracurricularService {
 	private ResumeRepo repo;
 	
 	
-	public void save(Extracurriculars extracurriculars,HttpServletRequest request)
+	public String save(Extracurriculars extracurriculars,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setExtracurriculars(extracurriculars);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
-	public void update(Extracurriculars extracurriculars,HttpServletRequest request)
+	public String update(Extracurriculars extracurriculars,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setExtracurriculars(extracurriculars);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
 	public Extracurriculars get(HttpServletRequest request)

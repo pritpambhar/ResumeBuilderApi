@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.backend.model.Constants;
 import com.backend.model.PublicProfile;
 import com.backend.service.PublicProfileService;
 
@@ -26,7 +27,7 @@ public class PublicProfileController {
 	{
 		PublicProfile profile=new PublicProfile(website, github, linkdin);
 		publicProfileService.save(profile,request);
-		return ResponseEntity.ok("success");
+		return ResponseEntity.ok(Constants.SUCCESS);
 	}
 	
 	@PutMapping("/publicprofile")
@@ -34,13 +35,13 @@ public class PublicProfileController {
 	{
 		PublicProfile profile=new PublicProfile(website, github, linkdin);
 		publicProfileService.update(profile,request);
-		return ResponseEntity.ok("success");
+		return ResponseEntity.ok(Constants.SUCCESS);
 	}
 	
 	@GetMapping("/publicprofile")
 	public ResponseEntity<?> getPublicProfile(HttpServletRequest request)
 	{
 		publicProfileService.get(request);
-		return ResponseEntity.ok("success");
+		return ResponseEntity.ok(Constants.SUCCESS);
 	}
 }

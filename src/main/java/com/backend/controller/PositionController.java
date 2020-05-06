@@ -13,20 +13,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.backend.model.Constants;
-import com.backend.model.Skills;
-import com.backend.service.SkillService;
+import com.backend.model.Positions;
+import com.backend.service.PositionService;
 
 @RestController
 @RequestMapping("/api")
-public class SkillController {
+public class PositionController {
 
 	@Autowired
-	private SkillService skillService;
+	private PositionService positionService;
 	
-	@PostMapping("/skills")
-	public ResponseEntity<?> saveSkills(@ModelAttribute Skills skills,HttpServletRequest request)
+	@PostMapping("/positions")
+	public ResponseEntity<?> savePositions(@ModelAttribute Positions positions,HttpServletRequest request)
 	{
-		String result=skillService.save(skills, request);
+		String result=positionService.save(positions, request);
 		if(result.equals(Constants.SUCCESS))
 		{
 			return ResponseEntity.ok(Constants.SUCCESS);
@@ -34,10 +34,10 @@ public class SkillController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Constants.FAILED);
 	}
 	
-	@PutMapping("/skills")
-	public ResponseEntity<?> editSkills(@ModelAttribute Skills skills,HttpServletRequest request)
+	@PutMapping("/positions")
+	public ResponseEntity<?> editPositions(@ModelAttribute Positions positions,HttpServletRequest request)
 	{
-		String result=skillService.update(skills, request);
+		String result=positionService.update(positions, request);
 		if(result.equals(Constants.SUCCESS))
 		{
 			return ResponseEntity.ok(Constants.SUCCESS);
@@ -45,10 +45,11 @@ public class SkillController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Constants.FAILED);
 	}
 	
-	@GetMapping("/skills")
-	public ResponseEntity<?> getSkills(HttpServletRequest request)
+	@GetMapping("/positions")
+	public ResponseEntity<?> getPositions(HttpServletRequest request)
 	{
-		Skills skills=skillService.get(request);
-		return ResponseEntity.ok(skills);
+		Positions positions=positionService.get(request);
+		return ResponseEntity.ok(positions);
+		
 	}
 }

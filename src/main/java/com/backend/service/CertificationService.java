@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.model.Certifications;
+import com.backend.model.Constants;
 import com.backend.model.Resume;
 import com.backend.repository.ResumeRepo;
 
@@ -18,22 +19,32 @@ public class CertificationService {
 	private ResumeRepo repo;
 	
 	
-	public void save(Certifications certifications,HttpServletRequest request)
+	public String save(Certifications certifications,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setCertifications(certifications);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
-	public void update(Certifications certifications,HttpServletRequest request)
+	public String update(Certifications certifications,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setCertifications(certifications);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
 	public Certifications get(HttpServletRequest request)

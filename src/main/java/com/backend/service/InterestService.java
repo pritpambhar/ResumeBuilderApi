@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.backend.model.Constants;
 import com.backend.model.Interests;
 import com.backend.model.Resume;
 import com.backend.repository.ResumeRepo;
@@ -17,22 +18,32 @@ public class InterestService {
 	@Autowired
 	private ResumeRepo repo;
 	
-	public void save(Interests interests,HttpServletRequest request)
+	public String save(Interests interests,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setInterests(interests);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
-	public void update(Interests interests,HttpServletRequest request)
+	public String update(Interests interests,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setInterests(interests);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
 	public Interests get(HttpServletRequest request)

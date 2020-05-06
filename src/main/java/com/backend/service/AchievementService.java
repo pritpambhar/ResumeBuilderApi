@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.backend.model.Achievements;
+import com.backend.model.Constants;
 import com.backend.model.Resume;
 import com.backend.repository.ResumeRepo;
 
@@ -17,22 +18,32 @@ public class AchievementService {
 	@Autowired
 	private ResumeRepo repo;
 	
-	public void save(Achievements achievements,HttpServletRequest request)
+	public String save(Achievements achievements,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setAchievements(achievements);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
-	public void update(Achievements achievements,HttpServletRequest request)
+	public String update(Achievements achievements,HttpServletRequest request)
 	{
 		String id=request.getHeader("token");
 		Optional<Resume> r=repo.findById(id);
 		Resume resume=r.get();
 		resume.setAchievements(achievements);
-		repo.save(resume);
+		Resume result=repo.save(resume);
+		if(result!=null)
+		{
+			return Constants.SUCCESS;
+		}
+		return Constants.FAILED;
 	}
 	
 	public Achievements get(HttpServletRequest request)
