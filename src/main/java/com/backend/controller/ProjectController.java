@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class ProjectController {
 	private ProjectService projectService;
 	
 	@PostMapping("/project")
-	public ResponseEntity<?> saveProjects(@ModelAttribute Projects project,HttpServletRequest request)
+	public ResponseEntity<?> saveProjects(@RequestBody Projects project,HttpServletRequest request)
 	{	
 		String result=projectService.save(project, request);
 		if(result.equals(Constants.SUCCESS))
@@ -36,7 +37,7 @@ public class ProjectController {
 	}
 
 	@PutMapping("/project")
-	public ResponseEntity<?> editProjects(@ModelAttribute Projects project,HttpServletRequest request)
+	public ResponseEntity<?> editProjects(@RequestBody Projects project,HttpServletRequest request)
 	{	
 		String result=projectService.update(project, request);
 		if(result.equals(Constants.SUCCESS))

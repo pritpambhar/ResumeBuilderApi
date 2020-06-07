@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class GeneralInfoController {
 	private GeneralInfoService generalInfoService;
 	
 	@PostMapping("/generalinfo")
-	public ResponseEntity<?> saveGeneralInfo(@ModelAttribute GeneralInfo generalInfo,HttpServletRequest request)
+	public ResponseEntity<?> saveGeneralInfo(@RequestBody GeneralInfo generalInfo,HttpServletRequest request)
 	{
 		String result = generalInfoService.save(generalInfo,request);
 		if(result.equals(Constants.SUCCESS))
@@ -36,7 +37,7 @@ public class GeneralInfoController {
 	}
 	
 	@PutMapping("/generalinfo")
-	public ResponseEntity<?> editGeneralInfo(@ModelAttribute GeneralInfo generalInfo,HttpServletRequest request)
+	public ResponseEntity<?> editGeneralInfo(@RequestBody GeneralInfo generalInfo,HttpServletRequest request)
 	{
 		String result = generalInfoService.update(generalInfo,request);
 		if(result.equals(Constants.SUCCESS))

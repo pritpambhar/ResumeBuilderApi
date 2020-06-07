@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class ExtraCurricularController {
 	private ExtracurricularService extracurricularService;
 	
 	@PostMapping("/extracurriculars")
-	public ResponseEntity<?> saveExtraCurricular(@ModelAttribute Extracurriculars extracurriculars,HttpServletRequest request)
+	public ResponseEntity<?> saveExtraCurricular(@RequestBody Extracurriculars extracurriculars,HttpServletRequest request)
 	{
 		String result=extracurricularService.save(extracurriculars,request);
 		if(result.equals(Constants.SUCCESS))
@@ -35,7 +36,7 @@ public class ExtraCurricularController {
 	}
 	
 	@PutMapping("/extracurriculars")
-	public ResponseEntity<?> editExtraCurricular(@ModelAttribute Extracurriculars extracurriculars,HttpServletRequest request)
+	public ResponseEntity<?> editExtraCurricular(@RequestBody Extracurriculars extracurriculars,HttpServletRequest request)
 	{
 		String result=extracurricularService.update(extracurriculars,request);
 		if(result.equals(Constants.SUCCESS))

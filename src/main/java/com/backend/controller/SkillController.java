@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class SkillController {
 	private SkillService skillService;
 	
 	@PostMapping("/skills")
-	public ResponseEntity<?> saveSkills(@ModelAttribute Skills skills,HttpServletRequest request)
+	public ResponseEntity<?> saveSkills(@RequestBody Skills skills,HttpServletRequest request)
 	{
 		String result=skillService.save(skills, request);
 		if(result.equals(Constants.SUCCESS))
@@ -35,7 +36,7 @@ public class SkillController {
 	}
 	
 	@PutMapping("/skills")
-	public ResponseEntity<?> editSkills(@ModelAttribute Skills skills,HttpServletRequest request)
+	public ResponseEntity<?> editSkills(@RequestBody Skills skills,HttpServletRequest request)
 	{
 		String result=skillService.update(skills, request);
 		if(result.equals(Constants.SUCCESS))

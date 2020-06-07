@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +26,7 @@ public class InternshipController {
 	private InternshipService internshipService;
 
 	@PostMapping("/internships")
-	public ResponseEntity<?> saveInternships(@ModelAttribute Internships internships,HttpServletRequest request)
+	public ResponseEntity<?> saveInternships(@RequestBody Internships internships,HttpServletRequest request)
 	{	
 		String result=internshipService.save(internships, request);
 		if(result.equals(Constants.SUCCESS))
@@ -34,8 +36,8 @@ public class InternshipController {
 		return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(Constants.FAILED);
 	}
 	
-	@PostMapping("/internships")
-	public ResponseEntity<?> editInternships(@ModelAttribute Internships internships,HttpServletRequest request)
+	@PutMapping("/internships")
+	public ResponseEntity<?> editInternships(@RequestBody Internships internships,HttpServletRequest request)
 	{	
 		String result=internshipService.update(internships, request);
 		if(result.equals(Constants.SUCCESS))
@@ -46,7 +48,7 @@ public class InternshipController {
 	}
 	
 	@GetMapping("/internships")
-	public ResponseEntity<?> getInternships(@ModelAttribute Internships internships,HttpServletRequest request)
+	public ResponseEntity<?> getInternships(HttpServletRequest request)
 	{	
 		Internships internship=internshipService.get(request);
 			return ResponseEntity.ok(internship);

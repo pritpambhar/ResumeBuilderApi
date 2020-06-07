@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class InterestController {
 	private InterestService interestService;
 	
 	@PostMapping("/interests")
-	public ResponseEntity<?> saveInterests(@ModelAttribute Interests interests,HttpServletRequest request)
+	public ResponseEntity<?> saveInterests(@RequestBody Interests interests,HttpServletRequest request)
 	{
 		String result=interestService.save(interests,request);
 		if(result.equals(Constants.SUCCESS))
@@ -35,7 +36,7 @@ public class InterestController {
 	}
 	
 	@PutMapping("/interests")
-	public ResponseEntity<?> editInterests(@ModelAttribute Interests interests,HttpServletRequest request)
+	public ResponseEntity<?> editInterests(@RequestBody Interests interests,HttpServletRequest request)
 	{
 		String result=interestService.update(interests,request);
 		if(result.equals(Constants.SUCCESS))

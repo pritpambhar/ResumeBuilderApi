@@ -23,17 +23,17 @@ public class PublicProfileController {
 	private PublicProfileService publicProfileService; 
 	
 	@PostMapping("/publicprofile")
-	public ResponseEntity<?> savePublicProfile(@RequestParam("website") String website,@RequestParam("github") String github,@RequestParam("linkdin") String linkdin,HttpServletRequest request)
+	public ResponseEntity<?> savePublicProfile(@RequestParam("website") String website,@RequestParam("github") String github,@RequestParam("linkedin") String linkedin,HttpServletRequest request)
 	{
-		PublicProfile profile=new PublicProfile(website, github, linkdin);
+		PublicProfile profile=new PublicProfile(website, github, linkedin);
 		publicProfileService.save(profile,request);
 		return ResponseEntity.ok(Constants.SUCCESS);
 	}
 	
 	@PutMapping("/publicprofile")
-	public ResponseEntity<?> updatePublicProfile(@RequestParam("website") String website,@RequestParam("github") String github,@RequestParam("linkdin") String linkdin,HttpServletRequest request)
+	public ResponseEntity<?> updatePublicProfile(@RequestParam("website") String website,@RequestParam("github") String github,@RequestParam("linkedin") String linkedin,HttpServletRequest request)
 	{
-		PublicProfile profile=new PublicProfile(website, github, linkdin);
+		PublicProfile profile=new PublicProfile(website, github, linkedin);
 		publicProfileService.update(profile,request);
 		return ResponseEntity.ok(Constants.SUCCESS);
 	}

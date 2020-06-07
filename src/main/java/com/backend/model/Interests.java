@@ -14,5 +14,5 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class Interests {
-	private List<String> positions;
+	private List<String> interests;
 }

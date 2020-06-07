@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -26,7 +27,7 @@ public class CertificationController {
 	private CertificationService certificationService;
 	
 	@PostMapping("/certifications")
-	public ResponseEntity<?> saveCertifications(@ModelAttribute Certifications certifications,HttpServletRequest request)
+	public ResponseEntity<?> saveCertifications(@RequestBody Certifications certifications,HttpServletRequest request)
 	{
 		String result=certificationService.save(certifications, request);
 		if(result.equals(Constants.SUCCESS))
@@ -37,7 +38,7 @@ public class CertificationController {
 	}
 	
 	@PutMapping("/certifications")
-	public ResponseEntity<?> editAchievements(@ModelAttribute Certifications certifications,HttpServletRequest request)
+	public ResponseEntity<?> editAchievements(@RequestBody Certifications certifications,HttpServletRequest request)
 	{
 		String result=certificationService.update(certifications, request);
 		if(result.equals(Constants.SUCCESS))

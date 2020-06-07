@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -25,7 +26,7 @@ public class AchievementController {
 	private AchievementService achievementService;
 	
 	@PostMapping("/achievements")
-	public ResponseEntity<?> saveAchievements(@ModelAttribute Achievements achievements,HttpServletRequest request)
+	public ResponseEntity<?> saveAchievements(@RequestBody Achievements achievements,HttpServletRequest request)
 	{
 		String result=achievementService.save(achievements, request);
 		if(result.equals(Constants.SUCCESS))
@@ -36,7 +37,7 @@ public class AchievementController {
 	}
 	
 	@PutMapping("/achievements")
-	public ResponseEntity<?> editAchievements(@ModelAttribute Achievements achievements,HttpServletRequest request)
+	public ResponseEntity<?> editAchievements(@RequestBody Achievements achievements,HttpServletRequest request)
 	{
 		String result=achievementService.update(achievements, request);
 		if(result.equals(Constants.SUCCESS))

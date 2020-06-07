@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,7 +25,7 @@ public class PositionController {
 	private PositionService positionService;
 	
 	@PostMapping("/positions")
-	public ResponseEntity<?> savePositions(@ModelAttribute Positions positions,HttpServletRequest request)
+	public ResponseEntity<?> savePositions(@RequestBody Positions positions,HttpServletRequest request)
 	{
 		String result=positionService.save(positions, request);
 		if(result.equals(Constants.SUCCESS))
@@ -35,7 +36,7 @@ public class PositionController {
 	}
 	
 	@PutMapping("/positions")
-	public ResponseEntity<?> editPositions(@ModelAttribute Positions positions,HttpServletRequest request)
+	public ResponseEntity<?> editPositions(@RequestBody Positions positions,HttpServletRequest request)
 	{
 		String result=positionService.update(positions, request);
 		if(result.equals(Constants.SUCCESS))
